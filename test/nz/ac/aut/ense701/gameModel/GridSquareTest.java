@@ -1,5 +1,14 @@
 package nz.ac.aut.ense701.gameModel;
 
+import nz.ac.aut.ense701.gamemodel.Occupant;
+import nz.ac.aut.ense701.gamemodel.Predator;
+import nz.ac.aut.ense701.gamemodel.Tool;
+import nz.ac.aut.ense701.gamemodel.Terrain;
+import nz.ac.aut.ense701.gamemodel.Position;
+import nz.ac.aut.ense701.gamemodel.Island;
+import nz.ac.aut.ense701.gamemodel.GridSquare;
+import nz.ac.aut.ense701.gamemodel.Player;
+import nz.ac.aut.ense701.gamemodel.Food;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
