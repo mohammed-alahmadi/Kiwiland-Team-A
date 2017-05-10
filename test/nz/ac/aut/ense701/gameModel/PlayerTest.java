@@ -1,11 +1,5 @@
 package nz.ac.aut.ense701.gameModel;
 
-import nz.ac.aut.ense701.gamemodel.Tool;
-import nz.ac.aut.ense701.gamemodel.Terrain;
-import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Island;
-import nz.ac.aut.ense701.gamemodel.Player;
-import nz.ac.aut.ense701.gamemodel.Food;
 import java.util.Collection;
 import org.junit.Test;
 

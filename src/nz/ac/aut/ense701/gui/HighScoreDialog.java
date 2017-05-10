@@ -5,16 +5,14 @@
  */
 package nz.ac.aut.ense701.gui;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.Dialog;
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
-import nz.ac.aut.ense701.gamemodel.HighScores;
-import nz.ac.aut.ense701.gamemodel.HighScores.Score;
+import nz.ac.aut.ense701.gameModel.HighScores;
+import nz.ac.aut.ense701.gameModel.HighScores.Score;
 
 /**
  *
- * @author mmahmoud
+ * @author mohammed
  */
 public class HighScoreDialog extends javax.swing.JDialog {
     
@@ -23,15 +21,19 @@ public class HighScoreDialog extends javax.swing.JDialog {
     
     /**
      * Creates new form HighScoreDialog
+     * @param parent
+     * @param modal
+     * @param highScores
      */
-    public HighScoreDialog(java.awt.Frame parent, boolean modal) {
+    public HighScoreDialog(java.awt.Frame parent, boolean modal, HighScores highScores) {
         super(parent, modal);
+        setModalityType(Dialog.ModalityType.DOCUMENT_MODAL);
+        setTitle("Kiwi Island High Score");
         initComponents();
         lstNameModel = new DefaultListModel();
         lstScoreModel = new DefaultListModel();
         lstName.setModel(lstNameModel);
         lstScore.setModel(lstScoreModel);
-        HighScores highScores = ((KiwiCountUI)parent).getHighScores();
         for (Score score : highScores.getHighScores()) {
             lstNameModel.addElement(score.getName());
             lstScoreModel.addElement(score.getScore()+"");
@@ -57,9 +59,8 @@ public class HighScoreDialog extends javax.swing.JDialog {
         btnClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 800));
 
-        displayPanel.setPreferredSize(new java.awt.Dimension(600, 751));
+        displayPanel.setPreferredSize(new java.awt.Dimension(200, 400));
 
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblName.setText("Name");
@@ -99,7 +100,7 @@ public class HighScoreDialog extends javax.swing.JDialog {
         displayPanelLayout.setVerticalGroup(
             displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(displayPanelLayout.createSequentialGroup()
-                .addGap(202, 202, 202)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblHighScore)
                 .addGap(85, 85, 85)
                 .addGroup(displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -156,11 +157,12 @@ public class HighScoreDialog extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(HighScoreDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                HighScoreDialog dialog = new HighScoreDialog(new javax.swing.JFrame(), true);
+                HighScoreDialog dialog = new HighScoreDialog(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

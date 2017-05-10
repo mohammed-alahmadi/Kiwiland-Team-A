@@ -1,6 +1,7 @@
 package nz.ac.aut.ense701.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -27,10 +28,13 @@ public class RulesDialog extends javax.swing.JDialog {
      *
      * @param parent
      * @param modal
+     * @param menuDialog
      */
     public RulesDialog(java.awt.Frame parent, boolean modal) {
+        setModalityType(Dialog.ModalityType.DOCUMENT_MODAL);
         try {
             initComponents();
+            setTitle("Kiwi Island Rules");
             PDDocument document = PDDocument.load(Class.class.getResourceAsStream("/nz/ac/aut/ense701/res/rules.pdf"));
             PDFRenderer pdfRenderer = new PDFRenderer(document);
             int pageCounter = 0;
@@ -78,7 +82,6 @@ public class RulesDialog extends javax.swing.JDialog {
         btnClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 800));
 
         btnPrevious.setText("Previous");
         btnPrevious.addActionListener(new java.awt.event.ActionListener() {
@@ -152,6 +155,7 @@ public class RulesDialog extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(RulesDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
