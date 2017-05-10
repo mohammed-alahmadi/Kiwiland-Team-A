@@ -3,10 +3,10 @@ package nz.ac.aut.ense701.gameModel;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import nz.ac.aut.ense701.gui.PlaySound;
 import nz.ac.aut.ense701.tools.MapLoader;
 import nz.ac.aut.ense701.tools.OccupantLoader;
 
@@ -30,13 +30,20 @@ public class Game
     public static final int MAXSIZE_INDEX = 4;
     public static final int SIZE_INDEX = 5;
     
+    private final KiwiFacts kiwiFacts;
+    private boolean isFactForPlayer;
+    
+    private PlaySound playSound;
+    
     /**
      * A new instance of Kiwi island that reads data from "IslandData.txt".
      */
     public Game() 
     {   
+        playSound = new PlaySound();
         eventListeners = new HashSet<GameEventListener>();
-
+        kiwiFacts = new KiwiFacts();
+        isFactForPlayer = false;
         createNewGame();
     }
     
@@ -376,6 +383,20 @@ public class Game
         return !("".equals(playerMessage));
     }
     
+    public String getKiwiFact() {
+        playSound.setSound(PlaySound.SOUND.KIWI);
+        playSound.playSound();
+        return kiwiFacts.getFact();
+    }
+    
+    public boolean isFactForPlayer() {
+        if (isFactForPlayer) {
+            isFactForPlayer = false;
+            return true;
+        }
+        return false;
+    }
+    
     /***************************************************************************************************************
      * Mutator Methods
     ****************************************************************************************************************/
@@ -485,6 +506,7 @@ public class Game
                 if (!kiwi.counted()) {
                     kiwi.count();
                     kiwiCount++;
+                    isFactForPlayer = true;
                 }
             }
         }
@@ -554,18 +576,24 @@ public class Game
          String message = "";
         if ( !player.isAlive() )
         {
+            playSound.setSound(PlaySound.SOUND.LOSE);
+            playSound.playSound();
             state = GameState.LOST;
             message = "Sorry, you have lost the game. " + this.getLoseMessage();
             this.setLoseMessage(message);
         }
         else if (!playerCanMove() )
         {
+            playSound.setSound(PlaySound.SOUND.LOSE);
+            playSound.playSound();
             state = GameState.LOST;
             message = "Sorry, you have lost the game. You do not have sufficient stamina to move.";
             this.setLoseMessage(message);
         }
         else if(predatorsTrapped == totalPredators)
         {
+            playSound.setSound(PlaySound.SOUND.WIN);
+            playSound.playSound();
             state = GameState.WON;
             message = "You win! You have done an excellent job and trapped all the predators.";
             this.setWinMessage(message);
@@ -574,6 +602,8 @@ public class Game
         {
             if(predatorsTrapped >= totalPredators * MIN_REQUIRED_CATCH)
             {
+                playSound.setSound(PlaySound.SOUND.WIN);
+                playSound.playSound();
                 state = GameState.WON;
                 message = "You win! You have counted all the kiwi and trapped at least 80% of the predators.";
                 this.setWinMessage(message);
@@ -652,7 +682,9 @@ public class Game
         {
             if ( occupant instanceof Hazard )
             {
-               handleHazard((Hazard)occupant) ;
+                //playSound.setSound(PlaySound.SOUND.HAZARD);
+                //playSound.playSound();
+                handleHazard((Hazard) occupant);
             }
         }
     }

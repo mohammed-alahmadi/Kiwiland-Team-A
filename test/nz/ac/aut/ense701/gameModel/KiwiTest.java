@@ -1,8 +1,5 @@
 package nz.ac.aut.ense701.gameModel;
 
-import nz.ac.aut.ense701.gamemodel.Kiwi;
-import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Island;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

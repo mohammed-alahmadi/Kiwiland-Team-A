@@ -1,16 +1,5 @@
 package nz.ac.aut.ense701.gameModel;
 
-import nz.ac.aut.ense701.gamemodel.Game;
-import nz.ac.aut.ense701.gamemodel.MoveDirection;
-import nz.ac.aut.ense701.gamemodel.Predator;
-import nz.ac.aut.ense701.gamemodel.Tool;
-import nz.ac.aut.ense701.gamemodel.Item;
-import nz.ac.aut.ense701.gamemodel.GameState;
-import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Island;
-import nz.ac.aut.ense701.gamemodel.Hazard;
-import nz.ac.aut.ense701.gamemodel.Player;
-import nz.ac.aut.ense701.gamemodel.Food;
 import org.junit.Test;
 
 /**

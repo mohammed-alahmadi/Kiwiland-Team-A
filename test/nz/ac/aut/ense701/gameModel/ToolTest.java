@@ -1,8 +1,5 @@
 package nz.ac.aut.ense701.gameModel;
 
-import nz.ac.aut.ense701.gamemodel.Tool;
-import nz.ac.aut.ense701.gamemodel.Position;
-import nz.ac.aut.ense701.gamemodel.Island;
 import org.junit.Test;
 
 /**
