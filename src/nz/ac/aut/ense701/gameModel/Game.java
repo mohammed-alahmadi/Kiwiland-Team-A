@@ -29,11 +29,16 @@ public class Game
     public static final int WEIGHT_INDEX = 3;
     public static final int MAXSIZE_INDEX = 4;
     public static final int SIZE_INDEX = 5;
+    private String mapSelected;
     
     private final KiwiFacts kiwiFacts;
-    private boolean isFactForPlayer;
     
-    private String mapSelected;
+    private final PredatorFacts PredatorFacts;
+    
+    private boolean isFactForPlayer;
+    private boolean isFactPredatorForPlayer;
+    
+    
     
     private PlaySound playSound;
     
@@ -45,7 +50,9 @@ public class Game
         playSound = new PlaySound();
         eventListeners = new HashSet<GameEventListener>();
         kiwiFacts = new KiwiFacts();
+        PredatorFacts = new PredatorFacts();
         isFactForPlayer = false;
+        isFactPredatorForPlayer =false;
         //createNewGame();
     }
     
@@ -401,9 +408,21 @@ public class Game
         return kiwiFacts.getFact();
     }
     
+   public String getFactPredator() {
+        
+        return PredatorFacts.getFactPredator();
+    }
+   
     public boolean isFactForPlayer() {
         if (isFactForPlayer) {
             isFactForPlayer = false;
+            return true;
+        }
+        return false;
+    }
+   public boolean isFactPredatorForPlayer() {
+        if (isFactPredatorForPlayer) {
+            isFactPredatorForPlayer = false;
             return true;
         }
         return false;
@@ -683,7 +702,9 @@ public class Game
             Occupant occupant = island.getPredator(current);
             //Predator has been trapped so remove
             island.removeOccupant(current, occupant); 
+           
             predatorsTrapped++;
+            isFactPredatorForPlayer = true;
         }
         
         return hadPredator;

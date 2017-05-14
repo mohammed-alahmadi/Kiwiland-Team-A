@@ -33,6 +33,12 @@ public class GameTest extends junit.framework.TestCase
         // Create a new game from the data file.
         // Player is in position 2,0 & has 100 units of stamina
         game           = new Game();
+        game.createNewGame();
+        // Issues due to the change of setup of game
+        // Needs a full review in Sprint 3
+        Position pos = new Position(island, 0, 2);
+        player = new Player(pos, "Name Here", 100.0, 10.0, 5.0);
+        island.updatePlayerPosition(player);
         playerPosition = game.getPlayer().getPosition();
         player         = game.getPlayer();
         island = game.getIsland();

@@ -116,6 +116,12 @@ public class KiwiCountUI
                     game.getKiwiFact(), "Kiwi Fact!",
                     JOptionPane.INFORMATION_MESSAGE);
         }
+        else if (game.isFactPredatorForPlayer()) {
+            JOptionPane.showMessageDialog(
+                    this, 
+                    game.getFactPredator(), "P Fact!",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
     }
     
      private void setAsGameListener()
@@ -892,7 +898,7 @@ public class KiwiCountUI
         }
     }//GEN-LAST:event_listObjectsValueChanged
 
-    private void btnUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUseActionPerformed
+    private void btnUseActionPerformed(java.awt.event.ActionEvent evt) {                                       
         game.useItem( listInventory.getSelectedValue());
         
         dlm.addElement("Meat");
@@ -900,7 +906,7 @@ public class KiwiCountUI
 
 //        
         
-    }//GEN-LAST:event_btnUseActionPerformed
+    }                                      
 
     //new
     
