@@ -340,6 +340,8 @@ public class Game
                 if(tool.isTrap())
                 {
                     result = island.hasPredator(player.getPosition());
+                    
+                    
                 }
                 //Screwdriver can only be used if player has a broken trap
                 else if (tool.isScrewdriver() && player.hasTrap())
@@ -503,7 +505,13 @@ public class Game
         updateGameState();
         return success;
     }
-    
+    //new
+    public void cookItem()
+    {
+    	player.Cookmeat();
+    	updateGameState();
+    }
+    //done
     /**
      * Count any kiwis in this position
      */
