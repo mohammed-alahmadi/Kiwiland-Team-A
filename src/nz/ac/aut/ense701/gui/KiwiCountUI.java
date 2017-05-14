@@ -36,6 +36,7 @@ public class KiwiCountUI
     private final MenuDialog menuDialog;
     private final HighScores highScores;
     
+    
     /**
      * Creates a GUI for the KiwiIsland game.
      * @param game the game object to represent with this GUI.
@@ -43,7 +44,7 @@ public class KiwiCountUI
      */
     public KiwiCountUI(Game game, HighScores highScores) 
     {
-        menuDialog = new MenuDialog(this, true, highScores);
+        menuDialog = new MenuDialog(this, true, highScores, game);
         menuDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         menuDialog.addWindowListener(new WindowAdapter() {
             @Override

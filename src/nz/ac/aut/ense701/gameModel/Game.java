@@ -33,6 +33,8 @@ public class Game
     private final KiwiFacts kiwiFacts;
     private boolean isFactForPlayer;
     
+    private String mapSelected;
+    
     private PlaySound playSound;
     
     /**
@@ -44,7 +46,7 @@ public class Game
         eventListeners = new HashSet<GameEventListener>();
         kiwiFacts = new KiwiFacts();
         isFactForPlayer = false;
-        createNewGame();
+        //createNewGame();
     }
     
     
@@ -58,7 +60,11 @@ public class Game
         totalKiwis = 0;
         predatorsTrapped = 0;
         kiwiCount = 0;
-        initialiseIslandFromFile("Map.xml");
+        if(mapSelected == null){
+            initialiseIslandFromFile("Map.xml");
+        }else{
+        initialiseIslandFromFile(mapSelected); 
+        }
         drawIsland();
         state = GameState.PLAYING;
         winMessage = "";
@@ -70,6 +76,10 @@ public class Game
     /***********************************************************************************************************************
      * Accessor methods for game data
     ************************************************************************************************************************/
+    
+    public void setMap(String map){
+        this.mapSelected = map;
+    }
     
     /**
      * Get number of rows on island

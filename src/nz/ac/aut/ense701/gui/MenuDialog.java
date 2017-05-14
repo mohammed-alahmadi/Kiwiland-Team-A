@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JDialog;
+import nz.ac.aut.ense701.gameModel.Game;
 import nz.ac.aut.ense701.gameModel.HighScores;
 
 public class MenuDialog extends javax.swing.JDialog {
@@ -18,6 +19,7 @@ public class MenuDialog extends javax.swing.JDialog {
     private final HighScores highScores;
     private String playerName;
     private BufferedImage logo;
+    private static Game game;
 
     /**
      * Creates new form MenuDialog
@@ -26,8 +28,9 @@ public class MenuDialog extends javax.swing.JDialog {
      * @param modal
      * @param highScores
      */
-    public MenuDialog(java.awt.Frame parent, boolean modal, HighScores highScores) {
+    public MenuDialog(java.awt.Frame parent, boolean modal, HighScores highScores, Game game) {
         super(parent, modal);
+        this.game = game;
         this.highScores = highScores;
         try {
             setModalityType(Dialog.ModalityType.DOCUMENT_MODAL);
@@ -102,6 +105,11 @@ public class MenuDialog extends javax.swing.JDialog {
         });
 
         btnLevel.setText("Level");
+        btnLevel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLevelActionPerformed(evt);
+            }
+        });
 
         btnQuit.setText("Quit");
         btnQuit.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +123,7 @@ public class MenuDialog extends javax.swing.JDialog {
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
-                .addContainerGap(219, Short.MAX_VALUE)
+                .addContainerGap(233, Short.MAX_VALUE)
                 .addComponent(btnHighScore)
                 .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -127,7 +135,7 @@ public class MenuDialog extends javax.swing.JDialog {
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnQuit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLevel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +153,7 @@ public class MenuDialog extends javax.swing.JDialog {
                     .addComponent(btnLevel))
                 .addGap(40, 40, 40)
                 .addComponent(btnQuit)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,6 +179,7 @@ public class MenuDialog extends javax.swing.JDialog {
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
         if (!txtPlayerName.getText().isEmpty()) {
             playerName = txtPlayerName.getText();
+            game.createNewGame();
             setVisible(false);
         }
     }//GEN-LAST:event_btnPlayActionPerformed
@@ -193,6 +202,14 @@ public class MenuDialog extends javax.swing.JDialog {
         highScores.saveHighScores();
         System.exit(0);
     }//GEN-LAST:event_btnQuitActionPerformed
+
+    private void btnLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLevelActionPerformed
+        LevelSelectorDialog levelSelector = new LevelSelectorDialog((Frame) getParent(), true, game);
+        levelSelector.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        levelSelector.pack();
+        levelSelector.setLocationRelativeTo(this);
+        levelSelector.setVisible(true);
+    }//GEN-LAST:event_btnLevelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,7 +237,7 @@ public class MenuDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MenuDialog dialog = new MenuDialog(new javax.swing.JFrame(), true, null);
+                MenuDialog dialog = new MenuDialog(new javax.swing.JFrame(), true, null, game);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
