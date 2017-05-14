@@ -296,6 +296,12 @@ public class Player
            stamina = maxStamina;
        }
     }
+    //new
+    public void Cookmeat()
+    {
+    	stamina += 10.0;
+    }
+    //done
     
     /**
      * Collect an item if it will fit in player's backpack.

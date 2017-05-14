@@ -9,6 +9,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+
+
+import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 
 import javax.swing.JOptionPane;
@@ -44,6 +47,8 @@ public class KiwiCountUI
      */
     public KiwiCountUI(Game game, HighScores highScores) 
     {
+    	
+    	
         menuDialog = new MenuDialog(this, true, highScores, game);
         menuDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         menuDialog.addWindowListener(new WindowAdapter() {
@@ -152,6 +157,7 @@ public class KiwiCountUI
         listInventory.clearSelection();
         listInventory.setToolTipText(null);
         btnUse.setEnabled(false);
+        btnCook.setEnabled(true);
         btnDrop.setEnabled(false);
         
         // update list of visible objects
@@ -232,12 +238,17 @@ public class KiwiCountUI
 //        btnMoveEast = new javax.swing.JButton();
 //        btnMoveWest = new javax.swing.JButton();
         
-        
+        //new///////
+        javax.swing.JPanel Meat = new javax.swing.JPanel();
+        Pmeat = new javax.swing.JList();
+        javax.swing.JScrollPane scrMeat = new javax.swing.JScrollPane();
+        //end/////
         javax.swing.JPanel pnlInventory = new javax.swing.JPanel();
         javax.swing.JScrollPane scrlInventory = new javax.swing.JScrollPane();
         listInventory = new javax.swing.JList();
         btnDrop = new javax.swing.JButton();
         btnUse = new javax.swing.JButton();
+        btnCook = new javax.swing.JButton();
         javax.swing.JPanel pnlObjects = new javax.swing.JPanel();
         javax.swing.JScrollPane scrlObjects = new javax.swing.JScrollPane();
         listObjects = new javax.swing.JList();
@@ -609,16 +620,28 @@ public class KiwiCountUI
       	pnlInventory.setBorder(javax.swing.BorderFactory.createTitledBorder("Inventory"));
         pnlInventory.setLayout(new java.awt.GridBagLayout());
 
+        
+ 
+        
+        
+       
+        
         listInventory.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3" };
+            String[] strings = {"Item 1", "Item 2", "Item 3"};
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+            
+            
         });
+        
+        
         listInventory.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listInventory.setVisibleRowCount(3);
+        listInventory.setVisibleRowCount(4);
         listInventory.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 listInventoryValueChanged(evt);
+                
+                
             }
         });
         scrlInventory.setViewportView(listInventory);
@@ -649,10 +672,16 @@ public class KiwiCountUI
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         pnlInventory.add(btnDrop, gridBagConstraints);
 
+        
+       
+        
+        
+        
         btnUse.setText("Use");
         btnUse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUseActionPerformed(evt);
+               
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -664,7 +693,28 @@ public class KiwiCountUI
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         pnlInventory.add(btnUse, gridBagConstraints);
-
+        
+        
+        
+        
+        //new  cook button
+//        btnCook.setText("Cook");
+//        btnCook.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//            	btnCookActionPerformed(evt);
+//            }
+//        });
+//        gridBagConstraints = new java.awt.GridBagConstraints();
+//        gridBagConstraints.gridx = 1;
+//        gridBagConstraints.gridy = 1;
+//        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+//        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+//        gridBagConstraints.weightx = 1.0;
+//        gridBagConstraints.weighty = 1.0;
+//        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+//        pnlInventory.add(btnCook, gridBagConstraints);
+        
+        
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -673,16 +723,63 @@ public class KiwiCountUI
         gridBagConstraints.weighty = 1.0;
         pnlControls.add(pnlInventory, gridBagConstraints);
 
+        //new////////////////////////////////////////
+        Meat.setBorder(javax.swing.BorderFactory.createTitledBorder("Meat"));
+        Meat.setLayout(new java.awt.GridBagLayout());
+        Pmeat.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        Pmeat.setVisibleRowCount(4);
+        scrMeat.setViewportView(Pmeat);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        Meat.add(scrMeat, gridBagConstraints);
+        
+        
+        
+        btnCook.setText("Cook");
+        btnCook.addActionListener(new java.awt.event.ActionListener() {
+        	public void actionPerformed(java.awt.event.ActionEvent evt) {
+        		btnCookActionPerformed(evt);
+        	}
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+      	gridBagConstraints.gridx = 0;
+      	gridBagConstraints.gridy = 1;
+      	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+      	gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+      	gridBagConstraints.weightx = 1.0;
+      	gridBagConstraints.weighty = 1.0;
+      	gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+      	Meat.add(btnCook, gridBagConstraints);
+        
+      	gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        pnlControls.add(Meat, gridBagConstraints);
+        
+        //end/////////////////////////////////////
+        
         pnlObjects.setBorder(javax.swing.BorderFactory.createTitledBorder("Objects"));
         java.awt.GridBagLayout pnlObjectsLayout = new java.awt.GridBagLayout();
         pnlObjectsLayout.columnWidths = new int[] {0, 5, 0};
         pnlObjectsLayout.rowHeights = new int[] {0, 5, 0};
         pnlObjects.setLayout(pnlObjectsLayout);
 
+        
         listObjects.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+            
+            
         });
         listObjects.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listObjects.setVisibleRowCount(3);
@@ -742,7 +839,7 @@ public class KiwiCountUI
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -776,10 +873,13 @@ public class KiwiCountUI
     private void btnCollectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCollectActionPerformed
         Object obj = listObjects.getSelectedValue();
         game.collectItem(obj);
+        
+        
     }//GEN-LAST:event_btnCollectActionPerformed
 
     private void btnDropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDropActionPerformed
         game.dropItem(listInventory.getSelectedValue());
+       
     }//GEN-LAST:event_btnDropActionPerformed
 
     private void listObjectsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listObjectsValueChanged
@@ -794,14 +894,40 @@ public class KiwiCountUI
 
     private void btnUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUseActionPerformed
         game.useItem( listInventory.getSelectedValue());
+        
+        dlm.addElement("Meat");
+        Pmeat.setModel(dlm);
+
+//        
+        
     }//GEN-LAST:event_btnUseActionPerformed
 
+    //new
+    
+    
+    private void btnCookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUseActionPerformed
+    	if(Pmeat.getModel().getSize() !=0)
+    	{
+    		game.cookItem();
+    	}
+    	dlm.remove(0);
+    	Pmeat.setModel(dlm);
+    	
+    	
+    }//GEN-LAST:event_btnUseActionPerformed
+    
+    
+    //
+    
+    
+    
     private void listInventoryValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listInventoryValueChanged
         Object item =  listInventory.getSelectedValue();
         btnDrop.setEnabled(true);
+//        btnCook.setEnabled(true);
         if ( item != null )
         {
-            btnUse.setEnabled(game.canUse(item));
+            btnUse.setEnabled(game.canUse(item));         
             listInventory.setToolTipText(game.getOccupantDescription(item));
         }
     }//GEN-LAST:event_listInventoryValueChanged
@@ -869,6 +995,12 @@ public class KiwiCountUI
     String describ_occupant;
     //end
     
+    //new
+    private javax.swing.JButton btnCook;
+    private javax.swing.JList Pmeat;
+    DefaultListModel dlm = new DefaultListModel();
+    
+    //end
     
     private Game game;
 }
