@@ -6,16 +6,13 @@ import static org.junit.Assert.*;
 /**
  *
  * @author mohammed
- * 
+ *
  */
 public class SoundTest {
-    
+
     public SoundTest() {
     }
 
-    /**
-     * Test of getStringRepresentation method, of class Fauna.
-     */
     @Test
     public void testGetSound() {
         PlaySound playSound = new PlaySound();
@@ -43,5 +40,5 @@ public class SoundTest {
         int expResult = 4;
         assertEquals(expResult, result);
     }
-    
+
 }

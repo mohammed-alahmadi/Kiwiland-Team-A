@@ -721,8 +721,9 @@ public class Game
         {
             if ( occupant instanceof Hazard )
             {
-                //playSound.setSound(PlaySound.SOUND.HAZARD);
-                //playSound.playSound();
+                //play Hazard sound
+                playSound.setSound(PlaySound.SOUND.HAZARD);
+                playSound.playSound();
                 handleHazard((Hazard) occupant);
             }
         }
